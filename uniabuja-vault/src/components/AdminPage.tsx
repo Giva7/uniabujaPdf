@@ -5,7 +5,7 @@ export function AdminPage(){
     <div className="min-h- bg-gray-50 p-4 sm:p-6">
       <div className="max-w-7xl mx-auto mb-6">
         <div className="flex items-center gap-3">
-          <div className="bg-gradient-to-r from-green-600 to-green-700 w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center shadow-sm">
+          <div className="bg-linear-to-r from-green-600 to-green-700 w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center shadow-sm">
             <Shield className="w-6 h-6 text-white" />
           </div>
           <div>
@@ -105,7 +105,7 @@ export function AdminPage(){
                 <p className="font-bold text-green-700 text-sm truncate">{item.code} - {item.title}</p>
                 <p className="text-xs text-gray-500 mt-1 flex items-center gap-1"><Eye className="w-3.5 h-3.5" /> By Admin • {item.views} views</p>
               </div>
-              <div className="flex gap-2 flex-shrink-0">
+              <div className="flex gap-2 shrink-0">
                 <button className="bg-green-600 text-white p-2.5 rounded-lg">
                   <CheckCircle className="w-4 h-4" />
                 </button>

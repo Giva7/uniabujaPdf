@@ -13,7 +13,7 @@ export function ProfilePage({ onSignOut, onUploadClick }: Props){
         {/* Left - User Card */}
         <div className="md:col-span-1">
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 sm:p-6 text-center md:sticky md:top-6">
-            <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-r from-green-600 to-green-700 rounded-full flex items-center justify-center mx-auto mb-3">
+            <div className="w-20 h-20 sm:w-24 sm:h-24 bg-linear-to-r from-green-600 to-green-700 rounded-full flex items-center justify-center mx-auto mb-3">
               <span className="text-2xl sm:text-3xl font-bold text-white">JD</span>
             </div>
             <h2 className="text-lg sm:text-xl font-bold mb-1">Jeffery Daniels</h2>
@@ -33,19 +33,19 @@ export function ProfilePage({ onSignOut, onUploadClick }: Props){
 
             <div className="mt-6 space-y-3 text-left text-sm">
               <div className="flex items-center gap-2.5 text-gray-600">
-                <User className="w-4 h-4 flex-shrink-0" />
+                <User className="w-4 h-4 shrink-0" />
                 <span className="truncate">Jeffery Daniels</span>
               </div>
               <div className="flex items-center gap-2.5 text-gray-600">
-                <GraduationCap className="w-4 h-4 flex-shrink-0" />
+                <GraduationCap className="w-4 h-4 shrink-0" />
                 <span className="truncate text-xs sm:text-sm">Agricultural & Bio-Environmental</span>
               </div>
               <div className="flex items-center gap-2.5 text-gray-600">
-                <BookOpen className="w-4 h-4 flex-shrink-0" />
+                <BookOpen className="w-4 h-4 shrink-0" />
                 <span>300 Level</span>
               </div>
               <div className="flex items-center gap-2.5 text-gray-600">
-                <Calendar className="w-4 h-4 flex-shrink-0" />
+                <Calendar className="w-4 h-4 shrink-0" />
                 <span>Joined Sept 2025</span>
               </div>
             </div>
@@ -72,7 +72,7 @@ export function ProfilePage({ onSignOut, onUploadClick }: Props){
               ].map((item) => (
                 <div key={item.code} className="border border-gray-200 rounded-xl p-4 hover:shadow-sm transition-shadow">
                   <div className="flex gap-3">
-                    <div className={`bg-${item.color}-50 w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 ${item.color === 'red'? 'bg-red-50' : 'bg-blue-50'}`}>
+                    <div className={`bg-${item.color}-50 w-12 h-12 rounded-lg flex items-center justify-center shrink-0 ${item.color === 'red'? 'bg-red-50' : 'bg-blue-50'}`}>
                       <FileText className={`w-6 h-6 ${item.color === 'red'? 'text-red-600' : 'text-blue-600'}`} />
                     </div>
                     <div className="flex-1 min-w-0">
@@ -82,7 +82,7 @@ export function ProfilePage({ onSignOut, onUploadClick }: Props){
                           <p className="font-semibold text-sm sm:text- truncate">{item.title}</p>
                           <p className="text- sm:text-xs text-gray-500 mt-1 truncate">general • ABE324_Practical_Lab_Report.docx</p>
                         </div>
-                        <span className={`px-2 py-0.5 rounded text- sm:text-xs font-semibold flex-shrink-0 ${item.status === 'Approved'? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>{item.status}</span>
+                        <span className={`px-2 py-0.5 rounded text- sm:text-xs font-semibold shrink-0 ${item.status === 'Approved'? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>{item.status}</span>
                       </div>
                       <div className="flex flex-wrap items-center gap-3 sm:gap-4 mt-3 text- sm:text-xs text-gray-500">
                         <span className="flex items-center gap-1"><Eye className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> {item.views} views</span>

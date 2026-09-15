@@ -10,7 +10,7 @@ export function MustSignIn({ onSignInClick, onCreateAccountClick }: Props){
     <div className="min-h- flex items-center justify-center p-4 sm:p-6 bg-gray-50">
       <div className="bg-white rounded-xl shadow-md p-6 sm:p-8 max-w-md w-full text-center border border-gray-100">
         <div className="relative w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-4">
-          <div className="bg-gradient-to-r from-green-600 to-green-700 w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center">
+          <div className="bg-linear-to-r from-green-600 to-green-700 w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center">
             <FileUp className="w-10 h-10 sm:w-12 sm:h-12 text-white" />
           </div>
           <div className="absolute -bottom-1 -right-1 bg-red-500 w-8 h-8 rounded-full flex items-center justify-center border-2 border-white">
@@ -21,7 +21,7 @@ export function MustSignIn({ onSignInClick, onCreateAccountClick }: Props){
         <p className="text-sm text-gray-600 mb-1">You must sign in before you can upload PDFs to</p>
         <p className="font-bold text-green-700 mb-6">UniAbuja Vault</p>
         <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 flex gap-2 text-left mb-6">
-          <ShieldAlert className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
+          <ShieldAlert className="w-5 h-5 text-yellow-600 shrink-0 mt-0.5" />
           <p className="text-xs sm:text-sm text-yellow-800">Only verified UniAbuja students can upload materials.</p>
         </div>
         <div className="space-y-3">

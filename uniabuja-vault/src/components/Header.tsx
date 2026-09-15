@@ -9,7 +9,7 @@ type Props = {
 
 export function Header({activeView, setActiveView, isSignedIn, isAdmin}:Props){
     return(
-        <header className="bg-gradient-to-r from-green-700 to-green-800 text-white shadow-lg sticky top-0 z-20">
+        <header className="bg-linear-to-r from-green-700 to-green-800 text-white shadow-lg sticky top-0 z-20">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
                 <div className="flex justify-between items-start mb-4">
                     <div>

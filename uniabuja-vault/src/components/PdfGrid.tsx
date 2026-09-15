@@ -3,36 +3,31 @@ import type { CourseTypes } from "./data";
 
 type Props = {
   courses: CourseTypes[];
-
+  allCourses: CourseTypes[]; // full list to update correctly when filtered
+  setCourses: (courses: CourseTypes[]) => void;
 }
 
-
-
-
-
-export function PdfGrid({ courses }: Props){
-    const handleDownload = (fileName: string | undefined) =>{
-        
-        console.log(courses)
-
-        if(!fileName){
-            alert('No file availble for this course');
+export function PdfGrid({ courses, allCourses, setCourses }: Props){
+    const handleDownload = (course: CourseTypes) =>{
+        if(!course.file_name){
+            alert('No file available for this course');
             return;
         }
         
-        
+        // 1. Increment count
+        const updated = allCourses.map(c => 
+            c.id === course.id ? { ...c, downloadCount: c.downloadCount + 1 } : c
+        );
+        setCourses(updated);
+
+        // 2. Download (your original logic)
         const link = document.createElement('a');
-        
-
-         link.href = `/${fileName}`;
-
-         link.download = fileName;
-         
-         document.body.appendChild(link);
-         link.click();
-         document.body.removeChild(link);
+        link.href = `/${course.file_name}`;
+        link.download = course.file_name;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     }
-
 
     return(
          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -73,7 +68,7 @@ export function PdfGrid({ courses }: Props){
                             {course.downloadCount}
                         </span>
                         <button 
-                            onClick={() => handleDownload(course.file_name)}
+                            onClick={() => handleDownload(course)}
                             className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-semibold">
                             <Download className="w-4 h-4" />
                             Download

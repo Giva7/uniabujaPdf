@@ -17,7 +17,8 @@ export function HomePage(){
     const [activeView, setActiveView] = useState<View>('explore')
     const [courses, setCourses] = useState<CourseTypes[]>(data)
     const [isSignedIn, setIsSignedIn] = useState(false)
-    const [isAdmin] = useState(true) // TODO: check real admin role
+    const [isAdmin] = useState(true) 
+    
 
     const headerActiveView: HeaderView =
         activeView === 'signin' || activeView === 'signup'? 'upload' :
@@ -27,15 +28,51 @@ export function HomePage(){
         setActiveView(v);
     }
 
+    
+
     return(
         <div className="min-h-screen bg-gray-50">
-            <Header activeView={headerActiveView} setActiveView={handleHeaderNav} isSignedIn={isSignedIn} isAdmin={isAdmin} />
+            <Header 
+                activeView={headerActiveView} 
+                setActiveView={handleHeaderNav} 
+                isSignedIn={isSignedIn} 
+                isAdmin={isAdmin} 
+            />
             <main className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
                 {activeView === 'explore' && <Explore courses={courses} setCourses={setCourses} />}
-                {activeView === 'upload' && (isSignedIn? <UploadForm /> : <MustSignIn onSignInClick={() => setActiveView('signin')} onCreateAccountClick={() => setActiveView('signup')} />)}
-                {activeView === 'signin' && <SignIn onBack={() => setActiveView('explore')} onSignInSuccess={() => { setIsSignedIn(true); setActiveView('upload'); }} onCreateAccountClick={() => setActiveView('signup')} />}
-                {activeView === 'signup' && <SignUp onBack={() => setActiveView('explore')} onSignInClick={() => setActiveView('signin')} onSignUpSuccess={() => { setIsSignedIn(true); setActiveView('upload'); }} />}
-                {activeView === 'profile' && (isSignedIn? <ProfilePage onSignOut={() => { setIsSignedIn(false); setActiveView('explore'); }} onUploadClick={() => setActiveView('upload')} /> : <MustSignIn onSignInClick={() => setActiveView('signin')} onCreateAccountClick={() => setActiveView('signup')} />)}
+
+                {activeView === 'upload' && (isSignedIn? <UploadForm />
+                 : <MustSignIn 
+                        onSignInClick={() => setActiveView('signin')} 
+                        onCreateAccountClick={() => setActiveView('signup')} 
+                    />
+                )}
+                {activeView === 'signin' && 
+                    <SignIn 
+                        onBack={() => setActiveView('explore')}             onSignInSuccess={() => { 
+                            setIsSignedIn(true); 
+                            setActiveView('upload');
+                         }} 
+                         onCreateAccountClick={() => setActiveView('signup')} 
+                    />
+                }
+                {activeView === 'signup' && 
+                    <SignUp 
+                        onBack={() => setActiveView('explore')} 
+                        onSignInClick={() => setActiveView('signin')} onSignUpSuccess={() => { setIsSignedIn(true); setActiveView('upload'); }} 
+                    />
+                }
+                {activeView === 'profile' && 
+                (isSignedIn? 
+                    <ProfilePage 
+                        onSignOut={() => { setIsSignedIn(false); 
+                        setActiveView('explore'); }} 
+                    onUploadClick={() => setActiveView('upload')} 
+                    /> 
+                :   <MustSignIn 
+                        onSignInClick={() => setActiveView('signin')} onCreateAccountClick={() => setActiveView('signup')} 
+                    />
+                )}
                 {activeView === 'admin' && <AdminPage />}
             </main>
         </div>

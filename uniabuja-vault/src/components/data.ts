@@ -9,6 +9,14 @@ export interface CourseTypes{
     file_name?: string;
 }
 
+export interface UserTypes{
+    matric: string;
+    password: string;
+    department: string;
+    level: string;
+    name: string;
+}
+
 export const data: CourseTypes[] = [
     {
         id: crypto.randomUUID(),
@@ -27,5 +35,15 @@ export const data: CourseTypes[] = [
         downloadCount: 0,
         uploadedBy: 'Admin',
         file_name: 'ABE324_Practical_Lab_Report.docx'
+    }
+]
+
+export const userData: UserTypes[] =[
+    {  
+        matric: '23/205TVD/004',
+        password: "password123",
+        department: "computer science",
+        level: "400", 
+        name:"jeffrey"
     }
 ]
