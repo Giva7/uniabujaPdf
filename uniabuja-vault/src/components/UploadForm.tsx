@@ -35,7 +35,7 @@ export function UploadForm(){
             const result = await response.json();
 
             if (response.ok && result.success) {
-                alert("File successfully uploaded to Cloudflare R2!");
+                alert("File successfully uploaded to the vault!. will be approved after review");
                 setCode('');
                 setTitle('');
                 setDepartment('');
@@ -45,7 +45,7 @@ export function UploadForm(){
             }
         } catch (err) {
             console.error("Upload error:", err);
-            alert("Error connecting to server.");
+            alert("Error connecting to vault.");
         } finally {
             setLoading(false);
         }
@@ -54,9 +54,7 @@ export function UploadForm(){
     return(
         <div className="bg-white rounded-lg shadow-md p-6 max-w-2xl mx-auto">
             <h2 className="text-2xl font-bold mb-1">Upload to vault</h2>
-            <p className="text-sm text-gray-600 mb-6">
-                Uploading as <span className="font-bold text-green-700">Name</span> . matric number
-            </p>
+            
             <form onSubmit={handleUpload} className="space-y-4">
                 <input 
                     value={code}
