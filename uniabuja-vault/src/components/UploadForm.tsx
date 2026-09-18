@@ -1,75 +1,83 @@
 import { useState } from "react"
-import type { CourseTypes } from "./data"
-
 
 
 export function UploadForm(){
-    const [newUpload, setNewUpload] = useState({})
     const [code, setCode] = useState('')
     const [title, setTitle] = useState('')
     const [department, setDepartment] = useState('')
     const [file, setFile] = useState<File | null>(null)
+    const [loading, setLoading] = useState(false)
 
-    function handleUpload(e:React.FormEvent){
+    async function handleUpload(e: React.FormEvent) {
         e.preventDefault();
 
-        if(!file){
+        if (!file) {
             alert('Please select a file to upload');
             return;
         }
 
+        setLoading(true);
+        const currentUser = JSON.parse(localStorage.getItem("vault_user") || "{}");
 
-        const newCourse: CourseTypes = {
-            id: crypto.randomUUID(),
-            code: code.toUpperCase(),
-            title: title,
-            department: department,
-            downloadCount: 0,
-            uploadedBy: 'You',
-            file_name: file.name
-            
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("code", code.toUpperCase());
+        formData.append("title", title);
+        formData.append("department", department);
+       formData.append("uploadedBy", currentUser.name ? `${currentUser.name} (${currentUser.matricNumber})` : "Anonymous");
+
+        try {
+            const response = await fetch("https://uniabuja-vault-api.ichapijeff.workers.dev/api/upload", {
+                method: "POST",
+                body: formData,
+            });
+
+            const result = await response.json();
+
+            if (response.ok && result.success) {
+                alert("File successfully uploaded to Cloudflare R2!");
+                setCode('');
+                setTitle('');
+                setDepartment('');
+                setFile(null);
+            } else {
+                alert(`Upload failed: ${result.error || "Unknown server error"}`);
+            }
+        } catch (err) {
+            console.error("Upload error:", err);
+            alert("Error connecting to server.");
+        } finally {
+            setLoading(false);
         }
-
-        setCode('');
-        setTitle('');
-        setDepartment('');
-        setFile(null);
-
-
-        console.log(newCourse)
     }
 
     return(
         <div className="bg-white rounded-lg shadow-md p-6 max-w-2xl mx-auto">
-            <h2 className="text-2xl font-bold mb-1">
-                Upload to vault
-            </h2>
+            <h2 className="text-2xl font-bold mb-1">Upload to vault</h2>
             <p className="text-sm text-gray-600 mb-6">
-                Uploading as 
-                <span className="font-bold text-green-700">
-                    Name
-                </span>
-                  . matric number
+                Uploading as <span className="font-bold text-green-700">Name</span> . matric number
             </p>
-            <form className="space-y-4">
+            <form onSubmit={handleUpload} className="space-y-4">
                 <input 
                     value={code}
                     onChange={(e)=> setCode(e.target.value)}
                     required 
                     placeholder="course code" 
-                    className="w-full px-3 py-2 border rounded-lg focus:ring-2  border-gray-300 focus:ring-green-500 outline-none" 
+                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 border-gray-300 focus:ring-green-500 outline-none" 
                 />
                 <input 
                     value={title}
                     onChange={(e)=> setTitle(e.target.value)}
                     required 
-                    placeholder="course title" className="w-full px-3 py-2 border rounded-lg focus:ring-2 border-gray-300 focus:ring-green-500 outline-none" 
+                    placeholder="course title" 
+                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 border-gray-300 focus:ring-green-500 outline-none" 
                 />
                 <input 
                     value={department}
                     onChange={(e)=> setDepartment(e.target.value)}
                     required 
-                    placeholder="department" className="w-full px-3 py-2 border rounded-lg focus:ring-2 border-gray-300 focus:ring-green-500 outline-none" 
+                    placeholder="department" 
+                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 border-gray-300 focus:ring-green-500 outline-none" 
                 />
                 
                 <input 
@@ -83,15 +91,17 @@ export function UploadForm(){
 
                 <div className="flex gap-3">
                     <button 
-                        onClick={handleUpload}
                         type="submit" 
+                        disabled={loading}
                         className="bg-green-600 text-white px-6 py-2 rounded-lg font-semibold disabled:opacity-50"
                     >
-                        upload
+                        {loading ? "Uploading..." : "Upload"}
                     </button>
                     <button 
                         type="button" 
-                        className="border px-6 py-2 rounded-lg">
+                        onClick={() => { setCode(''); setTitle(''); setDepartment(''); setFile(null); }}
+                        className="border px-6 py-2 rounded-lg"
+                    >
                         Cancel
                     </button>
                 </div>

@@ -7,6 +7,7 @@ export interface CourseTypes{
     uploadedBy: string;
     file_key?: string;
     file_name?: string;
+    status: 'pending' | 'approved' | 'rejected';
 }
 
 export interface UserTypes{
@@ -25,7 +26,8 @@ export const data: CourseTypes[] = [
         department: 'general',
         downloadCount: 0,
         uploadedBy: 'Admin',
-        file_name: 'ABE324_Practical_Lab_Report.docx'
+        file_name: 'ABE324_Practical_Lab_Report.docx',
+        status: 'approved'
     },
     {
         id: crypto.randomUUID(),
@@ -34,7 +36,8 @@ export const data: CourseTypes[] = [
         department: 'general',
         downloadCount: 0,
         uploadedBy: 'Admin',
-        file_name: 'ABE324_Practical_Lab_Report.docx'
+        file_name: 'ABE324_Practical_Lab_Report.docx',
+        status: 'approved'
     }
 ]
 
