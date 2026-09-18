@@ -1,6 +1,8 @@
 import { CheckCircle, Download, FileText, Eye } from "lucide-react";
 import type { CourseTypes } from "./data";
 
+const API_BASE_URL = "https://uniabuja-vault-api.ichapijeff.workers.dev";
+
 type Props = {
   courses: CourseTypes[];
   allCourses: CourseTypes[]; // full list to update correctly when filtered
@@ -14,15 +16,16 @@ export function PdfGrid({ courses, allCourses, setCourses }: Props){
             return;
         }
         
-        // 1. Increment count
+        // 1. Optimistic count bump for instant feedback — /api/download
+        // now also updates the real count in D1
         const updated = allCourses.map(c => 
             c.id === course.id ? { ...c, downloadCount: c.downloadCount + 1 } : c
         );
         setCourses(updated);
 
-        // 2. Download (your original logic)
+        // 2. The file lives in R2, so this has to go through the Worker
         const link = document.createElement('a');
-        link.href = `/${course.file_name}`;
+        link.href = `${API_BASE_URL}/api/download/${course.id}`;
         link.download = course.file_name;
         document.body.appendChild(link);
         link.click();
