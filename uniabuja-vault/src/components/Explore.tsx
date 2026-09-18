@@ -24,7 +24,7 @@ export function Explore({courses, setCourses}:Props){
 
     return(
         <div>
-            <Featured courses={courses} />
+            <Featured courses={courses} setCourses={setCourses} />
             <SearchFunction value={search} onChange={setSearch} />
             <PdfGrid courses={filteredCourses} setCourses={setCourses} allCourses={courses} />
             
