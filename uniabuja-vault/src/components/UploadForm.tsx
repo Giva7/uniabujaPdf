@@ -24,7 +24,7 @@ export function UploadForm(){
         formData.append("code", code.toUpperCase());
         formData.append("title", title);
         formData.append("department", department);
-       formData.append("uploadedBy", currentUser.name ? `${currentUser.name} (${currentUser.matricNumber})` : "Anonymous");
+       formData.append("uploadedBy", currentUser.name ? `${currentUser.name} ` : "Anonymous");
 
         try {
             const response = await fetch("https://uniabuja-vault-api.ichapijeff.workers.dev/api/upload", {

@@ -107,8 +107,8 @@ export function AdminPage() {
       <div className="max-w-7xl mx-auto bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
         <div className="p-4 sm:p-5 border-b border-gray-100 flex flex-col sm:flex-row gap-3 justify-between sm:items-center">
           <h3 className="font-bold text-base sm:text-lg">Resource Submissions</h3>
-          <div className="flex gap-2 w-full sm:w-auto">
-            <div className="relative flex-1 sm:flex-none">
+          <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+            <div className="relative min-w-0 flex-1 sm:flex-none">
               <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
               <input
                 placeholder="Search code or title..."
@@ -120,7 +120,7 @@ export function AdminPage() {
             <select
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-sm bg-white"
+              className="w-full sm:w-auto px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none text-sm bg-white"
             >
               <option value="All">All Statuses</option>
               <option value="Pending">Pending Only</option>
@@ -214,11 +214,11 @@ export function AdminPage() {
                   </div>
                   <div className="flex gap-2 shrink-0">
                     {item.status !== "approved" && (
-                      <button onClick={() => handleApprove(item.id)} className="bg-green-600 text-white p-2.5 rounded-lg">
+                      <button onClick={() => handleApprove(item.id)} className="bg-green-600 text-white p-3 rounded-lg">
                         <CheckCircle className="w-4 h-4" />
                       </button>
                     )}
-                    <button onClick={() => handleDelete(item.id)} className="bg-red-50 text-red-600 p-2.5 rounded-lg">
+                    <button onClick={() => handleDelete(item.id)} className="bg-red-50 text-red-600 p-3 rounded-lg">
                       <Trash2 className="w-4 h-4" />
                     </button>
                   </div>
