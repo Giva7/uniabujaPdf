@@ -197,7 +197,7 @@ export function AdminPage() {
             {/* Mobile Cards View */}
             <div className="md:hidden p-4 grid gap-3">
               {filteredCourses.map((item) => (
-                <div key={item.id} className="border border-gray-200 rounded-xl p-3.5 flex justify-between items-center gap-3">
+                <div key={item.id} className="min-w-0 border border-gray-200 rounded-xl p-3.5 flex justify-between items-center gap-3">
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2 mb-1">
                       <span className="font-bold text-green-700 text-sm truncate">{item.code}</span>
@@ -210,7 +210,7 @@ export function AdminPage() {
                       </span>
                     </div>
                     <p className="text-sm font-semibold truncate">{item.title}</p>
-                    <p className="text-xs text-gray-500 mt-1">{item.uploadedBy}</p>
+                    <p className="text-xs text-gray-500 mt-1 truncate">{item.uploadedBy}</p>
                   </div>
                   <div className="flex gap-2 shrink-0">
                     {item.status !== "approved" && (
